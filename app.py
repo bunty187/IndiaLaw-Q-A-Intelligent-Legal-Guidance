@@ -47,7 +47,9 @@ from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
 # from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.output_parsers import StrOutputParser
-
+import streamlit as st
+from langchain_core.messages import AIMessage, HumanMessage
+from pydantic import ValidationError
 from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
 from langchain_cohere import CohereRerank
 
@@ -66,7 +68,7 @@ os.environ['COHERE_API_KEY'] = 'qBkd9Con8JlRO5rosUMUKdYqEnijuM0gIoXSQsBd'
 
 model = ChatGroq(model_name="Llama3-8b-8192")
 
-CONNECTION_URI = "database/milvus_demo.db"
+CONNECTION_URI = "database/milvus_hybrid_search.db"
 connections.connect(uri=CONNECTION_URI)
 
 pk_field = "doc_id"
@@ -138,9 +140,6 @@ output_parser = StrOutputParser()
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
-import streamlit as st
-from langchain_core.messages import AIMessage, HumanMessage
-from pydantic import ValidationError
 
 # Assuming you have the necessary imports for your chain and template
 
@@ -177,6 +176,7 @@ if user_prompt is not None and user_prompt != "":
         st.markdown(user_prompt)
 
     with st.chat_message("AI"):
+        with st.spinner("AI is generating a response..."):
             response = rag_chain.invoke(user_prompt)
             st.write(response)  # Print the response for debugging
     st.session_state.chat_history.append(AIMessage(content=response))
