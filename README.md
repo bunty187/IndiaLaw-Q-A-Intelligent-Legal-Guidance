@@ -14,7 +14,8 @@ The RAPTOR study proposes an innovative approach for indexing and retrieval of d
 * Leaves are embedded and crowded.
 * Clusters are then combined into higher-level (more abstract) consolidations of information from related documents.
 * This is done recursively, resulting in a "tree" of raw documents (leaves) that lead to more abstract summaries.
-* 
+
+
 This tree structure is critical to the RAPTOR function because it captures both high-level and detailed aspects of text, which is especially beneficial for complex theme questions and multi-step reasoning in questioning and answering activities.
 
 Documents are segmented into shorter texts known as chunks, which are then embedded using an embedding model. A clustering method is then used to group these embeddings together. After clusters are formed, the text linked with each cluster is summarized using an LLM.
