@@ -1,0 +1,19 @@
+langchain 
+torch 
+sentence_transformers 
+huggingface-hub 
+pypdf 
+umap-learn 
+langchain-community 
+langchain-cohere 
+tiktoken 
+langchain-huggingface 
+langchain-groq
+pymilvus[model]
+langchain_milvus
+grpcio==1.60.1
+rank_bm25
+# pymilvus
+cohere
+nltk
+langchain_cohere
