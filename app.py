@@ -92,7 +92,7 @@ collection = Collection(
 )
 
 # Read list from the file
-with open('list.txt', 'r') as file:
+with open('summary.txt', 'r') as file:
     contents = file.read()
     all_texts = ast.literal_eval(contents)
 
