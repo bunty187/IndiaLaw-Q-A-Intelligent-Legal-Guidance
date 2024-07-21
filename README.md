@@ -6,6 +6,22 @@ IndiaLaw Q&A is a project focused on building an intelligent chatbot for providi
 
 IndiaLaw Q&A uses powerful AI technology to develop a conversational interface that can initiate and maintain conversations with users, delivering smooth and intuitive legal advice. IndiaLaw Q&A provides exact and contextually relevant responses to legal questions by leveraging the power of Retrieval-Augmented Generation (RAG) with the Recursive Abstractive Processing for Tree Organized Retrieval (RAPTOR) indexing approach and the Milvus vector database. RAPTOR is an innovative and powerful indexing and retrieval strategy for LLMs that takes a bottom-up approach, grouping and summarizing text segments (chunks) to create a hierarchical tree structure. This intelligent chatbot is designed with Streamlit to provide a user-friendly experience for a variety of use cases in the Indian legal system.
 
+RAPTOR introduces a novel approach to retrieval-augmented language models by constructing a recursive tree structure from documents. RAPTOR takes an innovative method to retrieval-augmented language models by creating a recursive tree structure from texts. This enables more efficient and context-aware information retrieval from huge texts, solving major constraints in traditional language models.
+
+The RAPTOR study proposes an innovative approach for indexing and retrieval of documents.
+
+The leaves are a collection of starter documents.
+Leaves are embedded and crowded.
+Clusters are then combined into higher-level (more abstract) consolidations of information from related documents.
+This is done recursively, resulting in a "tree" of raw documents (leaves) that lead to more abstract summaries.
+This tree structure is critical to the RAPTOR function because it captures both high-level and detailed aspects of text, which is especially beneficial for complex theme questions and multi-step reasoning in questioning and answering activities.
+
+Documents are segmented into shorter texts known as chunks, which are then embedded using an embedding model. A clustering method is then used to group these embeddings together. After clusters are formed, the text linked with each cluster is summarized using an LLM.
+
+The summaries are created as nodes in a tree, with higher-level nodes delivering more abstract summaries.
+![RAPTOR](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*tDFZ-oHJJM4ww5w_S-ZLNg.png)
+
+
 
 Here, we used legal books as input data for our analysis. Each PDF file is over 300 pages. The PDF links for these books are provided below.:
 * [Family Law](https://lawfaculty.du.ac.in/userfiles/downloads/LLBCM/Ist%20Term_Family%20Law-%20I_LB105_2023.pdf)
@@ -37,8 +53,8 @@ Here, we used legal books as input data for our analysis. Each PDF file is over 
       streamlit run app.py
       ```
    2. Use the Chatbot:
-      Open your web browser and go to http://localhost:8501 (default Streamlit port).
-      You will see the chat interface titled "💬IndiaLaw-Q-A-Intelligent-Legal-Guidance
+      * Open your web browser and go to http://localhost:8501 (default Streamlit port).
+      * You will see the chat interface titled "💬IndiaLaw-Q-A-Intelligent-Legal-Guidance
 
 
 5. Interacting with the Chatbot:
