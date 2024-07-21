@@ -10,10 +10,11 @@ RAPTOR introduces a novel approach to retrieval-augmented language models by con
 
 The RAPTOR study proposes an innovative approach for indexing and retrieval of documents.
 
-The leaves are a collection of starter documents.
-Leaves are embedded and crowded.
-Clusters are then combined into higher-level (more abstract) consolidations of information from related documents.
-This is done recursively, resulting in a "tree" of raw documents (leaves) that lead to more abstract summaries.
+* The leaves are a collection of starter documents.
+* Leaves are embedded and crowded.
+* Clusters are then combined into higher-level (more abstract) consolidations of information from related documents.
+* This is done recursively, resulting in a "tree" of raw documents (leaves) that lead to more abstract summaries.
+* 
 This tree structure is critical to the RAPTOR function because it captures both high-level and detailed aspects of text, which is especially beneficial for complex theme questions and multi-step reasoning in questioning and answering activities.
 
 Documents are segmented into shorter texts known as chunks, which are then embedded using an embedding model. A clustering method is then used to group these embeddings together. After clusters are formed, the text linked with each cluster is summarized using an LLM.
@@ -27,6 +28,43 @@ Here, we used legal books as input data for our analysis. Each PDF file is over 
 * [Family Law](https://lawfaculty.du.ac.in/userfiles/downloads/LLBCM/Ist%20Term_Family%20Law-%20I_LB105_2023.pdf)
 * [Administrative Law](https://lawfaculty.du.ac.in/userfiles/downloads/LLBCM/IVth%20Term_Administrative%20Law_LB%20402_2023.pdf)
 * [Labour Law](https://www.icsi.edu/media/webmodules/Labour_Laws&_Practice.pdf)
+
+Steps Involved:
+* Load the PDF:
+   *Import necessary libraries for PDF processing.
+   * Load the PDF document into your Python environment.
+   * Perform Cleaning on the PDF:
+
+* Extract text from the PDF.
+   * Remove unwanted characters, whitespace, and noise.
+* Standardize text format (e.g., lowercase conversion).
+
+* Chunk the PDF:
+   * Divide the cleaned text into smaller, manageable chunks.
+   * Ensure chunks are of appropriate size for processing.
+
+* Apply Raptor Indexing Techniques:
+   * Use Raptor indexing to convert chunks into meaningful embeddings.
+   * Create sparse and dense embeddings for each chunk.
+   * Store in Milvus Vector Database:
+
+* Set up a Milvus database connection.
+  * Create a schema for storing text and embeddings.
+  * Insert chunks and their embeddings into the Milvus collection.
+
+* Hybrid Search using BM25 and Semantic Dense Retrieval:
+   * Implement BM25 for sparse retrieval.
+   * Implement semantic dense retrieval for dense embeddings.
+   * Combine results from both methods for hybrid search.
+
+* Re-rank with Cohere Re-rank:
+   * Use Cohere’s re-ranking API to re-rank the search results.
+   * Integrate the re-ranking step to improve result relevance.
+  
+* Use Streamlit App to Make User Interface:
+   * Create a Streamlit app to provide a user-friendly interface.
+   * Implement functionalities for PDF upload, search, and display results.
+   * Integrate hybrid search and re-ranking into the Streamlit app.
 
 # Getting Started
 1. Clone the repository:
