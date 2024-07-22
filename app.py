@@ -151,7 +151,7 @@ rag_chain = (
     | output_parser
 )
 
-st.title("💬Leave No Context Behind Paper Q/A RAG System")
+st.title("💬IndianLaw-Q-A-Intelligent-Legal-Guidance ⚖")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [
@@ -168,9 +168,10 @@ for message in st.session_state.chat_history:
             st.write(message.content)
 
 user_prompt = st.chat_input()
-
-if user_prompt is not None and user_prompt != "":
+if st.button("Ask") and user_prompt:
     st.session_state.chat_history.append(HumanMessage(content=user_prompt))
+# if user_prompt is not None and user_prompt != "":
+#     st.session_state.chat_history.append(HumanMessage(content=user_prompt))
 
     with st.chat_message("Human"):
         st.markdown(user_prompt)
