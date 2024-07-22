@@ -121,20 +121,6 @@ compression_retriever = ContextualCompressionRetriever(
 )
 
 
-## Define the Chat template
-chat_template = ChatPromptTemplate.from_messages([
-    # System Message Prompt Template
-    SystemMessage(content="""You are a Helpful AI Bot.
-    You take the context and question from user. Your answer should be based on the specific context."""),
-    # Human Message Prompt Template
-    HumanMessagePromptTemplate.from_template("""Answer the question based on the given context.
-    Context:
-    {context}
-    Question:
-    {question}
-    Answer: """)
-])
-
 ### Define the structure of the output
 output_parser = StrOutputParser()
 
@@ -146,7 +132,6 @@ def format_docs(docs):
 
 rag_chain = (
     {"context": compression_retriever | format_docs, "question": RunnablePassthrough()}
-    | chat_template
     | model
     | output_parser
 )
@@ -168,10 +153,9 @@ for message in st.session_state.chat_history:
             st.write(message.content)
 
 user_prompt = st.chat_input()
-if st.button("Ask") and user_prompt:
+
+if user_prompt is not None and user_prompt != "":
     st.session_state.chat_history.append(HumanMessage(content=user_prompt))
-# if user_prompt is not None and user_prompt != "":
-#     st.session_state.chat_history.append(HumanMessage(content=user_prompt))
 
     with st.chat_message("Human"):
         st.markdown(user_prompt)
