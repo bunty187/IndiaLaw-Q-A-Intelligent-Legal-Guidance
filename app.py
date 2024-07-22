@@ -63,8 +63,8 @@ from pymilvus import (
 )
 
 # Set environment variables
-os.environ['GROQ_API_KEY'] = ''
-os.environ['COHERE_API_KEY'] = ''
+os.environ['GROQ_API_KEY'] = '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'
+os.environ['COHERE_API_KEY'] = 'qBkd9Con8JlRO5rosUMUKdYqEnijuM0gIoXSQsBd'
 
 model = ChatGroq(model_name="Llama3-8b-8192")
 
@@ -90,8 +90,9 @@ fields = [
 
 schema = CollectionSchema(fields=fields, enable_dynamic_field=False)
 collection = Collection(
-    name="IntroductionToTheRaptors", schema=schema, consistency_level="Strong"
+    name="BriefSummaryofLaws", schema=schema, consistency_level="Strong"
 )
+collection.load()
 
 # Read list from the file
 with open('summary.txt', 'r') as file:
