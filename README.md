@@ -2,6 +2,9 @@
 
 IndiaLaw Q&A is a project focused on building an intelligent chatbot for providing legal guidance on the Indian legal system. This repository contains the code and resources required to develop, deploy, and interact with the chatbot.
 
+DEMO OF CHATBOT
+https://github.com/user-attachments/assets/7da5f9ca-7698-48ea-8eca-63ef411d24d5
+
 # Introduction
 
 IndiaLaw Q&A uses powerful AI technology to develop a conversational interface that can initiate and maintain conversations with users, delivering smooth and intuitive legal advice. IndiaLaw Q&A provides exact and contextually relevant responses to legal questions by leveraging the power of Retrieval-Augmented Generation (RAG) with the Recursive Abstractive Processing for Tree Organized Retrieval (RAPTOR) indexing approach and the Milvus vector database. RAPTOR is an innovative and powerful indexing and retrieval strategy for LLMs that takes a bottom-up approach, grouping and summarizing text segments (chunks) to create a hierarchical tree structure. This intelligent chatbot is designed with Streamlit to provide a user-friendly experience for a variety of use cases in the Indian legal system.
