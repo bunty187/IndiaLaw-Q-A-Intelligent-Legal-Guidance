@@ -48,8 +48,8 @@ with HiddenPrints():
     nltk.download("punkt")
 
 # Set environment variables
-os.environ['GROQ_API_KEY'] = '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'
-os.environ['COHERE_API_KEY'] = 'qBkd9Con8JlRO5rosUMUKdYqEnijuM0gIoXSQsBd'
+os.environ['GROQ_API_KEY'] = ''
+os.environ['COHERE_API_KEY'] = ''
 
 model = ChatGroq(model_name="Llama3-8b-8192")
 
