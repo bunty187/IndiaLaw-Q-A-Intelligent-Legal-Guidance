@@ -176,8 +176,8 @@ if user_prompt is not None and user_prompt != "":
 
     with st.chat_message("AI"):
         with st.spinner("Thinking..."):
-            response = rag_chain.stream(user_prompt)
-            st.write_stream(response)
+            response = rag_chain.invoke(user_prompt)
+            st.write(response)
 
     st.session_state.chat_history.append(AIMessage(content=response))
 
