@@ -167,7 +167,6 @@ for message in st.session_state.chat_history:
         with st.chat_message("Human"):
             st.write(message.content)
 
-# Take the user input
 user_prompt = st.chat_input()
 
 if user_prompt is not None and user_prompt != "":
@@ -176,13 +175,15 @@ if user_prompt is not None and user_prompt != "":
     with st.chat_message("Human"):
         st.markdown(user_prompt)
 
-    # Create a placeholder for the spinner
-    spinner_placeholder = st.empty()
-    with spinner_placeholder.container():
-        with st.spinner("AI is generating a response..."):
-            response = rag_chain.invoke(user_prompt)
-            # Clear the spinner placeholder once the response is ready
-            spinner_placeholder.empty()
-            st.write(response)  # Print the response for debugging
+    # Create a placeholder for the spinner and response
+    with st.spinner("AI is generating a response..."):
+        spinner_placeholder = st.empty()
+        spinner_placeholder.text("Generating response...")
+
+        response = rag_chain.invoke(user_prompt)
+        
+        # Clear the spinner and display the response
+        spinner_placeholder.empty()
+        st.chat_message("AI").write(response)
 
     st.session_state.chat_history.append(AIMessage(content=response))
