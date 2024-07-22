@@ -2,7 +2,7 @@
 
 IndiaLaw Q&A is a project focused on building an intelligent chatbot for providing legal guidance on the Indian legal system. This repository contains the code and resources required to develop, deploy, and interact with the chatbot.
 
-![DEMO OF CHATBOT](https://github.com/user-attachments/assets/7da5f9ca-7698-48ea-8eca-63ef411d24d5)
+[DEMO OF CHATBOT](https://github.com/user-attachments/assets/7da5f9ca-7698-48ea-8eca-63ef411d24d5)
 
 # Introduction
 
