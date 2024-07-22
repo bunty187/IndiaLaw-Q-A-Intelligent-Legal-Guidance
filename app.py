@@ -120,6 +120,19 @@ compression_retriever = ContextualCompressionRetriever(
     base_compressor=compressor, base_retriever=retriever
 )
 
+chat_template = ChatPromptTemplate.from_messages([
+    # System Message Prompt Template
+    SystemMessage(content="""You are a Helpful Law AI Bot.
+    You take the context and question from user. Your answer should be based on the specific context."""),
+    # Human Message Prompt Template
+    HumanMessagePromptTemplate.from_template("""Answer the question based on the given context.
+    Context:
+    {context}
+    Question:
+    {question}
+    Answer: """)
+])
+
 
 ### Define the structure of the output
 output_parser = StrOutputParser()
@@ -132,6 +145,7 @@ def format_docs(docs):
 
 rag_chain = (
     {"context": compression_retriever | format_docs, "question": RunnablePassthrough()}
+    | chat_template
     | model
     | output_parser
 )
