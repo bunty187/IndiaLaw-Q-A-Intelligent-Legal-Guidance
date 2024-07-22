@@ -1,3 +1,32 @@
+import ast
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain.chains import RetrievalQA
+from langchain_groq import ChatGroq
+from langchain_core.callbacks import CallbackManager, StreamingStdOutCallbackHandler
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough, RunnableParallel
+from langchain_milvus.retrievers import MilvusCollectionHybridSearchRetriever
+from langchain_milvus.utils.sparse import BM25SparseEmbedding
+from langchain.chains import create_retrieval_chain
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
+from langchain_community.chat_message_histories import ChatMessageHistory
+
+import streamlit as st
+from pydantic import ValidationError
+from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
+from langchain_cohere import CohereRerank
+
+from pymilvus import (
+    Collection,
+    CollectionSchema,
+    DataType,
+    FieldSchema,
+    WeightedRanker,
+    connections,
+)
 import os
 import sys
 import streamlit as st
@@ -17,50 +46,6 @@ class HiddenPrints:
 
 with HiddenPrints():
     nltk.download("punkt")
-
-import ast
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.chains import RetrievalQA
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.document_loaders import PyPDFDirectoryLoader
-from langchain_groq import ChatGroq
-from langchain_core.callbacks import CallbackManager, StreamingStdOutCallbackHandler
-from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough, RunnableParallel
-from langchain_milvus.retrievers import MilvusCollectionHybridSearchRetriever
-from langchain_milvus.utils.sparse import BM25SparseEmbedding
-from langchain.chains import create_retrieval_chain
-from langchain_core.runnables.history import RunnableWithMessageHistory
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
-from langchain_community.chat_message_histories import ChatMessageHistory
-
-from langchain_core.runnables import RunnablePassthrough, RunnableParallel
-
-from langchain.chains import create_retrieval_chain
-from langchain_core.runnables.history import RunnableWithMessageHistory
-from langchain.chains.combine_documents import create_stuff_documents_chain
-
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
-# from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.output_parsers import StrOutputParser
-import streamlit as st
-from langchain_core.messages import AIMessage, HumanMessage
-from pydantic import ValidationError
-from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
-from langchain_cohere import CohereRerank
-
-from pymilvus import (
-    Collection,
-    CollectionSchema,
-    DataType,
-    FieldSchema,
-    WeightedRanker,
-    connections,
-)
 
 # Set environment variables
 os.environ['GROQ_API_KEY'] = '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'
@@ -180,16 +165,3 @@ if user_prompt is not None and user_prompt != "":
             st.write(response)
 
     st.session_state.chat_history.append(AIMessage(content=response))
-
-    # # Create a placeholder for the spinner and response
-    # with st.spinner("AI is generating a response..."):
-    #     spinner_placeholder = st.empty()
-    #     spinner_placeholder.text("Generating response...")
-
-    #     response = rag_chain.invoke(user_prompt)
-        
-    #     # Clear the spinner and display the response
-    #     spinner_placeholder.empty()
-    #     st.chat_message("AI").write(response)
-
-    # st.session_state.chat_history.append(AIMessage(content=response))
