@@ -145,7 +145,7 @@ def format_docs(docs):
 
 rag_chain = (
     {"context": compression_retriever | format_docs, "question": RunnablePassthrough()}
-    # | chat_template
+    | chat_template
     | model
     | output_parser
 )
