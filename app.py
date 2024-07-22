@@ -37,7 +37,7 @@ from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
 from langchain_community.chat_message_histories import ChatMessageHistory
 
-from langchain_core.runnables import RunnablePassthrough,RunnableParallel
+from langchain_core.runnables import RunnablePassthrough, RunnableParallel
 
 from langchain.chains import create_retrieval_chain
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -176,8 +176,13 @@ if user_prompt is not None and user_prompt != "":
     with st.chat_message("Human"):
         st.markdown(user_prompt)
 
-    with st.chat_message("AI"):
+    # Create a placeholder for the spinner
+    spinner_placeholder = st.empty()
+    with spinner_placeholder.container():
         with st.spinner("AI is generating a response..."):
             response = rag_chain.invoke(user_prompt)
+            # Clear the spinner placeholder once the response is ready
+            spinner_placeholder.empty()
             st.write(response)  # Print the response for debugging
+
     st.session_state.chat_history.append(AIMessage(content=response))
