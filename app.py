@@ -145,7 +145,7 @@ def format_docs(docs):
 
 rag_chain = (
     {"context": compression_retriever | format_docs, "question": RunnablePassthrough()}
-    | chat_template
+    # | chat_template
     | model
     | output_parser
 )
@@ -176,7 +176,7 @@ if user_prompt is not None and user_prompt != "":
 
     with st.chat_message("AI"):
         with st.spinner("Thinking..."):
-            response = rag_chain.invoke(user_input)
+            response = rag_chain.invoke(user_prompt)
             st.write(response)
 
     st.session_state.chat_history.append(AIMessage(content=response))
