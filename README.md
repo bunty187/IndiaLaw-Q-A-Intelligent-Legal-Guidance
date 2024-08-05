@@ -77,7 +77,7 @@ Steps Involved:
    ```
 2. Install the libraries:
    ```
-   pip install the requirements.txt
+   pip install -r requirements.txt
    ```
 3. Configuration
    1. Set Environment Variables:
